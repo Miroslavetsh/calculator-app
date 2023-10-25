@@ -1,1 +1,1 @@
-export { default as UserUpdateActions } from './UserUpdateActions'
+export type { default as UserState } from './UserState'

@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+
+import store from '@redux/store'
 
 import Login from '@routes/login'
 import Main from '@routes/main'
@@ -8,6 +11,10 @@ import Main from '@routes/main'
 import './index.css'
 
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to='/login' replace />,
+  },
   {
     path: '/main',
     element: <Main />,
@@ -20,6 +27,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 )

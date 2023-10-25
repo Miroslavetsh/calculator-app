@@ -6,12 +6,15 @@ type PropTypes = {
   children?: React.ReactNode
 }
 
+// TODO: Provide validation for credentials here
 const RequireAuth: React.FC<PropTypes> = ({ children }) => {
-  const { username } = useAuth()
+  const { username, email } = useAuth()
   const location = useLocation()
 
-  if (!username) {
-    return <Navigate to='/' state={{ from: location }} replace />
+  const emptyCredentials = !username || !email
+
+  if (emptyCredentials) {
+    return <Navigate to='/login' state={{ from: location }} replace />
   } else {
     return children
   }

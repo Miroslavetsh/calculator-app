@@ -26,7 +26,8 @@
       "@routes/*": ["routes/*"],
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
-      "@models/*": ["models/*"]
+      "@models/*": ["models/*"],
+      "@redux/*": ["redux/*"]
     }
   },
   "include": ["src"],

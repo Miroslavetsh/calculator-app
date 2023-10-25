@@ -1,58 +1,28 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { UserUpdateActions } from '@models/index'
-import { Input } from '@components/index'
-
-type UserState = {
-  username: string
-  email: string
-}
-
-type UserAction = {
-  type: UserUpdateActions
-  payload: string
-}
-
-function userReducer(state: UserState, action: UserAction) {
-  const { type, payload } = action
-
-  switch (type) {
-    case UserUpdateActions.USERNAME:
-      return {
-        ...state,
-        username: payload,
-      }
-    case UserUpdateActions.EMAIL:
-      return {
-        ...state,
-        email: payload,
-      }
-    default:
-      return state
-  }
-}
+import { updateEmail, updateUsername } from '@redux/reducers/user'
+import { selectUser } from '@redux/selectors'
+import { useAppDispatch, useAppSelector } from '@hooks/index'
+import { Button, Input } from '@components/index'
 
 const LoginForm: React.FC = () => {
-  const [{ username, email }, dispatch] = useReducer(userReducer, {
-    username: '',
-    email: '',
-  })
+  const dispatch = useAppDispatch()
+  const { username, email } = useAppSelector(selectUser)
+  const navigate = useNavigate()
 
-  const navigate = useNavigate();
-
-  const updateUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: UserUpdateActions.USERNAME, payload: e.target.value })
+  // TODO: Use debounce
+  const updateUsernameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateUsername(e.target.value))
   }
 
-  const updateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: UserUpdateActions.EMAIL, payload: e.target.value })
+  const updateEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateEmail(e.target.value))
   }
 
   const fakeAuth = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    // TODO: Connect with state manager & Provide validation
+    //TODO: validate credentials here as well
     navigate('/main')
   }
 
@@ -62,22 +32,18 @@ const LoginForm: React.FC = () => {
         label='Username'
         value={username}
         type='text'
-        onChange={updateUsername}
+        onChange={updateUsernameHandler}
         placeholder='Enter username'
       />
       <Input
         label='Email'
         value={email}
-        onChange={updateEmail}
+        onChange={updateEmailHandler}
         type='text'
         placeholder='Enter username'
       />
 
-      <button
-        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-        type='submit'>
-        Submit
-      </button>
+      <Button type='submit'>Submit</Button>
     </form>
   )
 }
