@@ -9,11 +9,6 @@ import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Login />,
-    action: () => redirect('/login'),
-  },
-  {
     path: '/main',
     element: <Main />,
   },

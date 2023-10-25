@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Globals */
+#root {
+  min-block-size: 100vh;
+
+  background-color: #212121;
+  color: #fff;
+}

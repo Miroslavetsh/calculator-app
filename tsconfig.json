@@ -25,7 +25,8 @@
     "paths": {
       "@routes/*": ["routes/*"],
       "@components/*": ["components/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@models/*": ["models/*"]
     }
   },
   "include": ["src"],
