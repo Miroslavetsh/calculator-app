@@ -20,10 +20,7 @@ export default function Main() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // console.log('herrere')
-    // console.log(query.set('tab', 'calc'))
     const queryTabName = searchParams.get('tab') as Tabs
-    console.log(queryTabName)
     if (Object.values(Tabs).includes(queryTabName)) setActiveTab(queryTabName)
   }, [activeTab])
 
@@ -72,7 +69,7 @@ export default function Main() {
             </p>
           </div>
         </header>
-        <div className='flex justify-center items-center py-36'>{tabs[activeTab]}</div>
+        <div className='flex justify-center items-center py-28'>{tabs[activeTab]}</div>
       </div>
     </RequireAuth>
   )
