@@ -27,7 +27,8 @@
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
       "@models/*": ["models/*"],
-      "@redux/*": ["redux/*"]
+      "@redux/*": ["redux/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"],

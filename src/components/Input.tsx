@@ -5,6 +5,7 @@ const Input: React.FC<InputHTMLAttributes<HTMLInputElement> & { label: string }>
   ...props
 }) => {
   return (
+    // TODO: Use classnames on each ui component
     <div className='mb-4'>
       {label && <label className='block text-gray-400 text-sm font-bold mb-2'>{label}</label>}
 

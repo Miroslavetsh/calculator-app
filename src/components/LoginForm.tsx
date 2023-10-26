@@ -23,7 +23,7 @@ const LoginForm: React.FC = () => {
   const fakeAuth = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     //TODO: validate credentials here as well
-    navigate('/main')
+    navigate('/main?tab=calculator')
   }
 
   return (
@@ -40,7 +40,7 @@ const LoginForm: React.FC = () => {
         value={email}
         onChange={updateEmailHandler}
         type='text'
-        placeholder='Enter username'
+        placeholder='Enter email'
       />
 
       <Button type='submit'>Submit</Button>
