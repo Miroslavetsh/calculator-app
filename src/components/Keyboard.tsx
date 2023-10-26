@@ -1,13 +1,16 @@
+import { digits, operations } from '@data/index'
 import { hasDataset } from '@utils/index'
-
-const digits = [9, 8, 7, 6, 5, 4, 3, , 2, 1, 0, '=']
-const operations = ['+', '-', '/', '*']
+import useAppDispatch from '@hooks/useAppDispatch'
+import { remember, updateDisplay } from '@redux/reducers/calculator'
 
 const Keyboard: React.FC = () => {
+  const dispatch = useAppDispatch()
+
   const handleKeyboardClick = (evt: React.MouseEvent<HTMLDivElement>) => {
     if (hasDataset(evt.target)) {
       //TODO: Implement displaying and calculating
-      // evt.target.dataset.value
+      dispatch(updateDisplay(evt.target.dataset.value))
+      dispatch(remember(evt.target.dataset.value))
     }
   }
 
@@ -16,7 +19,7 @@ const Keyboard: React.FC = () => {
     <div className='max-w-[280px] mx-auto my-8 p-4 border rounded-lg shadow-md bg-transparent'>
       <div className='grid grid-cols-3 gap-4' onClick={handleKeyboardClick}>
         <div className='col-span-2'>
-          <div className='inline-flex justify-between flex-wrap gap-4'>
+          <div className='grid grid-cols-3 gap-4'>
             {digits.map((digit, index) => (
               <button
                 key={index}

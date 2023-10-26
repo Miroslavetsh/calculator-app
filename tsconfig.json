@@ -28,7 +28,8 @@
       "@hooks/*": ["hooks/*"],
       "@models/*": ["models/*"],
       "@redux/*": ["redux/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@data/*": ["data/*"]
     }
   },
   "include": ["src"],

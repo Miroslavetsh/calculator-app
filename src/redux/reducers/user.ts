@@ -1,8 +1,6 @@
-import { PayloadAction, createSelector, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { UserState } from '@models/index'
-
-import { selectRoot } from '../selectors'
 
 const initialState: UserState = { username: '', email: '' }
 

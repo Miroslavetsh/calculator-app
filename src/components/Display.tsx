@@ -1,4 +1,9 @@
+import { useAppSelector } from '@hooks/index'
+import { selectCalculatorDisplay } from '@redux/selectors'
+
 const Display: React.FC = () => {
+  const display = useAppSelector(selectCalculatorDisplay)
+
   return (
     <div className='my-4 text-center'>
       {/* TODO: Implement native keyboard */}
@@ -6,7 +11,7 @@ const Display: React.FC = () => {
       <input
         className='bg-gray-100 text-gray-700 font-bold py-2 px-4 rounded w-full'
         type='text'
-        // value={display}
+        value={display}
         readOnly
       />
     </div>

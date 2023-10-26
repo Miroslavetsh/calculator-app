@@ -12,6 +12,7 @@ export default defineConfig({
       '@models': path.resolve(__dirname, 'src/models'),
       '@redux': path.resolve(__dirname, 'src/redux'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@data': path.resolve(__dirname, 'src/data'),
     },
   },
 })

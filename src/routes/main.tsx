@@ -55,7 +55,10 @@ export default function Main() {
           <div className='flex gap-2'>
             {Object.values(Tabs).map((tab: Tabs) => {
               return (
-                <Button className={getButtonClassName(tab)} onClick={getOnTabClickHandler(tab)}>
+                <Button
+                  key={tab}
+                  className={getButtonClassName(tab)}
+                  onClick={getOnTabClickHandler(tab)}>
                   {capitalize(tab)}
                 </Button>
               )
@@ -69,7 +72,7 @@ export default function Main() {
             </p>
           </div>
         </header>
-        <div className='flex justify-center items-center py-28'>{tabs[activeTab]}</div>
+        <div className='flex justify-center items-center py-20 pb-0'>{tabs[activeTab]}</div>
       </div>
     </RequireAuth>
   )
