@@ -33,4 +33,15 @@ describe('Login flow', () => {
 
     cy.contains('Hello, Myroslav').should('exist')
   })
+
+  it('should back to /login after logout', () => {
+    cy.get('[data-testId="username-field"]').should('exist').type('Myroslav')
+    cy.get('[data-testId="email-field"]').should('exist').type('dfgshte@gmail.com')
+
+    cy.contains('Submit').click()
+    cy.contains('Logout').click()
+
+    cy.get('[data-testId="username-field"]').should('exist')
+    cy.get('[data-testId="email-field"]').should('exist')
+  })
 })
