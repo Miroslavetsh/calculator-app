@@ -11,6 +11,8 @@ export const selectCalculatorDisplay = createSelector(
   (state) => state.calculator.display,
 )
 
+export const selectCalculatorError = createSelector(selectRoot, (state) => state.calculator.error)
+
 export const selectCalculatorHistory = createSelector(
   selectRoot,
   (state) => state.calculator.history,

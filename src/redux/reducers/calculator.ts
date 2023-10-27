@@ -5,6 +5,7 @@ import type { CalculatorState } from '@models/index'
 const initialState: CalculatorState = {
   display: '',
   history: [],
+  error: '',
 }
 
 export const calculatorSlice = createSlice({
@@ -12,9 +13,18 @@ export const calculatorSlice = createSlice({
   initialState,
   reducers: {
     updateDisplay: (state, { payload }: PayloadAction<string>) => {
-      const display = state.display.concat(payload)
-      //TODO: Add a calculation if = is pressed
-      return { ...state, display }
+      if (payload === '=') {
+        try {
+          const display = eval(state.display).toString()
+          return { ...state, display }
+        } catch (error) {
+          return { ...state, error: 'Invalid Input' }
+        }
+      } else {
+        const display = state.display.concat(payload)
+
+        return { ...state, display }
+      }
     },
     remember: (state, { payload }: PayloadAction<string>) => {
       const { history: oldHistory } = state
@@ -31,7 +41,7 @@ export const calculatorSlice = createSlice({
       }
     },
     clearHistory: (state) => ({ ...state, history: [] }),
-    clearDisplay: (state) => ({ ...state, display: '' }),
+    clearDisplay: (state) => ({ ...state, display: '', error: '' }),
     clear: () => initialState,
   },
 })
