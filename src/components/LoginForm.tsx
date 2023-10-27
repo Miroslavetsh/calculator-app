@@ -60,6 +60,7 @@ const LoginForm: React.FC = () => {
   return (
     <form onSubmit={fakeAuth}>
       <Input
+        data-testId='username-field'
         label='Username'
         value={username}
         onChange={updateUsernameHandler}
@@ -68,6 +69,7 @@ const LoginForm: React.FC = () => {
         placeholder='Enter username'
       />
       <Input
+        data-testId='email-field'
         label='Email'
         error={errors.email}
         value={email}
