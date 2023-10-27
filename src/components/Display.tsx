@@ -12,6 +12,7 @@ const Display: React.FC = () => {
       {/* TODO: Implement native keyboard */}
       {/* <p className='mb-2 text-gray-500'>Allowed to use native keyboard</p> */}
       <input
+        data-testId='display'
         className={cn('bg-gray-100 text-gray-700 font-bold py-2 px-4 rounded w-full', {
           'text-red-500': error.length > 0,
         })}

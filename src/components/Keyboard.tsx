@@ -23,6 +23,7 @@ const Keyboard: React.FC = () => {
             {digits.map((digit, index) => (
               <button
                 key={index}
+                data-testId={`key-${digit}`}
                 className='bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none'
                 data-value={digit}>
                 {digit}
@@ -35,6 +36,7 @@ const Keyboard: React.FC = () => {
             {operations.map((operation, index) => (
               <button
                 key={index}
+                data-testId={`key-${operation}`}
                 data-value={operation}
                 className='bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded focus:outline-none'>
                 {operation}
