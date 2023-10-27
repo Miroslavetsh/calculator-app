@@ -1,13 +1,16 @@
 import React, { InputHTMLAttributes } from 'react'
 
-const Input: React.FC<InputHTMLAttributes<HTMLInputElement> & { label: string }> = ({
-  label,
-  ...props
-}) => {
+const Input: React.FC<
+  InputHTMLAttributes<HTMLInputElement> & { label: string; error?: string }
+> = ({ label, error, ...props }) => {
   return (
     // TODO: Use classnames on each ui component
     <div className='mb-4'>
-      {label && <label className='block text-gray-400 text-sm font-bold mb-2'>{label}</label>}
+      {error ? (
+        <label className='block text-red-500 text-sm font-bold mb-2'>{error}</label>
+      ) : (
+        label && <label className='block text-gray-400 text-sm font-bold mb-2'>{label}</label>
+      )}
 
       <input
         {...props}

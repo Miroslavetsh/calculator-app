@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { updateEmail, updateUsername } from '@redux/reducers/user'
@@ -9,7 +9,33 @@ import { Button, Input } from '@components/index'
 const LoginForm: React.FC = () => {
   const dispatch = useAppDispatch()
   const { username, email } = useAppSelector(selectUser)
+  const [errors, setErrors] = useState({
+    username: '',
+    email: '',
+  })
+
+  const usernameSatisfying = username.length >= 3
+  const emailLengthSatisfying = email.length >= 6
+  const emailMatchesPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
+
+  const usernameValid = usernameSatisfying
+  const emailValid = emailLengthSatisfying && emailMatchesPattern
+
   const navigate = useNavigate()
+
+  const setUsernameError = (username: string) => setErrors((prev) => ({ ...prev, username }))
+  const clearUsernameError = () => setUsernameError('')
+  const setEmailError = (email: string) => setErrors((prev) => ({ ...prev, email }))
+  const clearEmailError = () => setEmailError('')
+
+  const checkValidity = () => {
+    if (emailValid) clearEmailError()
+    if (usernameValid) clearUsernameError()
+  }
+
+  useEffect(() => {
+    checkValidity()
+  }, [username, email])
 
   // TODO: Use debounce
   const updateUsernameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,8 +48,13 @@ const LoginForm: React.FC = () => {
 
   const fakeAuth = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    //TODO: validate credentials here as well
-    navigate('/main?tab=calculator')
+
+    if (!usernameSatisfying) setUsernameError('3+ chars')
+
+    if (!emailMatchesPattern) setEmailError('Should match email pattern')
+    if (!emailLengthSatisfying) setEmailError('6+ chars')
+
+    if (emailValid && usernameValid) navigate('/main?tab=calculator')
   }
 
   return (
@@ -31,12 +62,14 @@ const LoginForm: React.FC = () => {
       <Input
         label='Username'
         value={username}
-        type='text'
         onChange={updateUsernameHandler}
+        error={errors.username}
+        type='text'
         placeholder='Enter username'
       />
       <Input
         label='Email'
+        error={errors.email}
         value={email}
         onChange={updateEmailHandler}
         type='text'
